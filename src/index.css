@@ -173,6 +173,10 @@ body {
     display: flex;
     gap: 20px;
     margin-top: 10px;
+    gap: 12px; 
+    padding: 0 15px;
+    width: calc(100% + 30px); 
+    margin-left: -15px;
 }
 
 .signup-page .agency-options label {
@@ -180,6 +184,8 @@ body {
     display: flex;
     align-items: center;
     gap: 5px;
+    min-width: 120px;
+    justify-content: center;
 }
 
 .signup-page .agency-options input[type="radio"] {
@@ -267,18 +273,21 @@ body {
 
 .account-settings-page .camera-icon {
     position: absolute;
-    bottom: -5px;
-    right: -5px;
+    bottom: 5px;
+    right: 5px;
+    z-index: 10; 
+    transform: scale(0.9); 
     background-color: #6c25ff;
     border-radius: 50%;
     width: 30px;
     height: 30px;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     cursor: pointer;
     border: 2px solid white;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+
 }
 
 .account-settings-page .camera-icon span {
@@ -301,6 +310,17 @@ body {
 .account-settings-page .description p {
     margin: 5px 0;
     color: grey;
+}
+.account-settings-page .back-button {
+    width: 100%;
+    padding: 12px;
+    margin: 12px 0;
+    border: none;
+    color: white;
+    font-size: 16px;
+    background-color: #6c25ff;
+    cursor: pointer;
+    border-radius: 5px;
 }
 
 /* Global Styles */
