@@ -164,32 +164,41 @@ body {
     outline: none;
     font-size: 16px;
 }
-
-.signup-page .agency-group {
-    margin-top: 20px;
-}
-
+/* Agency Radio Buttons */
 .signup-page .agency-options {
     display: flex;
-    gap: 20px;
-    margin-top: 10px;
-    gap: 12px; 
-    padding: 0 15px;
-    width: calc(100% + 30px); 
-    margin-left: -15px;
+    gap: 8px; /* Reduced from 20px */
+    margin-top: 8px;
+    padding: 0; /* Remove horizontal padding */
+    width: 100%;
+    justify-content: flex-start; /* Left alignment */
+    margin-left: 0; /* Remove negative margin */
 }
 
 .signup-page .agency-options label {
     color: #6c25ff;
     display: flex;
     align-items: center;
-    gap: 5px;
-    min-width: 120px;
-    justify-content: center;
+    gap: 6px;
+    padding: 8px 12px;
+    min-width: auto; /* Remove fixed width */
+    white-space: nowrap;
+    background: #f7f8f9;
+    transition: all 0.2s ease;
 }
 
-.signup-page .agency-options input[type="radio"] {
-    accent-color: #6c25ff;
+.signup-page .agency-options label:hover {
+    background: #eceaff;
+}
+
+/* For better mobile alignment */
+@media (max-width: 375px) {
+    .signup-page .agency-options {
+        gap: 6px;
+    }
+    .signup-page .agency-options label {
+        padding: 6px 10px;
+    }
 }
 
 .signup-page .create-account-button {

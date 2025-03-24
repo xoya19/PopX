@@ -1,5 +1,9 @@
 import { useState } from 'react';
-import profileImage from './assets/profile.png'; // Import the image from assets
+import WelcomePg from '../components/Welc-Pg';
+import LoginPg from '../components/LoginPg';
+import SignupPg from '../components/SignupPg';
+import AccSettnPg from '../components/SettnPg';
+import profileImage from './assets/profile.png'; 
 import './index.css';
 
 export default function App() {
@@ -132,187 +136,52 @@ export default function App() {
 
   return (
     <div className='app-container'>
-      {currentPage === "landing" && (
-        <div className='landing-page'>
-          <h1>Welcome to PopX</h1>
-          <p>Welcome Back Please Login.New User?Please Create Account to use PopX</p>
-          <button onClick={showSignup}>Create Account</button>
-          <button onClick={showLogin}>Already Registered? Login</button>
-        </div>
-      )}
+      {currentPage === "landing" && <WelcomePg onSignup={showSignup} onLogin={showLogin} />}
 
       {currentPage === "signup" && (
-        <div className='signup-page'>
-          <button className="back-button-create-page" onClick={() => setCurrentPage("landing")}></button>
-          <h1>Create your PopX account</h1>
-          <p>Fill in your details to get started.</p>
-          <div className="input-group">
-            <legend>Full Name<span className="required-star">*</span></legend>
-            <input
-              type='text'
-              value={fullName}
-              onChange={(e) => setFullName(e.target.value)}
-              placeholder='Marry Doe'
-              required
-            />
-          </div>
-          <div className="input-group">
-            <legend>Phone number<span className="required-star">*</span></legend>
-            <input
-              type='tel'
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-              placeholder='1234567890'
-              maxLength={10}
-              required
-            />
-          </div>
-          <div className="input-group">
-            <legend>Email address<span className="required-star">*</span></legend>
-            <input
-              type='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder='example@domain.com'
-              required
-            />
-          </div>
-          <div className="input-group">
-            <legend>Password<span className="required-star">*</span></legend>
-            <div className="password-input-container">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder='Password123!'
-                required
-              />
-              <button
-                className="toggle-password"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? '👁️' : '👁️‍🗨️'}
-              </button>
-            </div>
-          </div>
-          <div className="input-group">
-            <legend>Company name</legend>
-            <input
-              type='text'
-              value={companyName}
-              onChange={(e) => setCompanyName(e.target.value)}
-              placeholder='Your Company'
-            />
-          </div>
-          <div className="input-group agency-group">
-            <legend>Are you an Agency?<span className="required-star">*</span></legend>
-            <div className="agency-options">
-              <label>
-                <input
-                  type='radio'
-                  name='agency'
-                  checked={isAgency === true}
-                  onChange={() => setIsAgency(true)}
-                />
-                Yes
-              </label>
-              <label>
-                <input
-                  type='radio'
-                  name='agency'
-                  checked={isAgency === false}
-                  onChange={() => setIsAgency(false)}
-                />
-                No
-              </label>
-            </div>
-          </div>
-          <button className="create-account-button" onClick={handleCreateAccount}>Create Account</button>
-        </div>
+        <SignupPg
+          onBack={() => setCurrentPage("landing")}
+          onCreateAccount={handleCreateAccount} // Changed from showAccountSettings
+          fullName={fullName}
+          setFullName={setFullName}
+          phoneNumber={phoneNumber}
+          setPhoneNumber={setPhoneNumber}
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+          companyName={companyName}
+          setCompanyName={setCompanyName}
+          isAgency={isAgency}
+          setIsAgency={setIsAgency}
+        />
       )}
 
       {currentPage === "login" && (
-        <div className='login-page'>
-          <h1>Sign in to your PopX account</h1>
-          <p>Enter your credentials below.</p>
-          <div className="input-group">
-            <legend>Email Address<span className="required-star">*</span></legend>
-            <input
-              type='email'
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder='Enter email address'
-              required
-            />
-          </div>
-          <div className="input-group">
-            <legend>Password<span className="required-star">*</span></legend>
-            <div className="password-input-container">
-              <input
-                type={showPassword ? 'text' : 'password'}
-                value={password}
-                onChange={(e) => setPassword(e.target.value)}
-                placeholder='Enter password'
-                required
-              />
-              <button
-                className="toggle-password"
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                {showPassword ? '👁️' : '👁️‍🗨️'}
-              </button>
-            </div>
-          </div>
-          <button className="login-button" onClick={handleLogin}>Login</button>
-          {showCreateAccountButton && (
-            <button className="create-account-button" onClick={showSignup}>Create Account</button>
-          )}
-        </div>
+        <LoginPg
+          onBack={() => setCurrentPage("landing")}
+          onLogin={handleLogin}
+          email={email}
+          setEmail={setEmail}
+          password={password}
+          setPassword={setPassword}
+          showPassword={showPassword}
+          setShowPassword={setShowPassword}
+          showCreateAccountButton={showCreateAccountButton}
+          onSignup={showSignup}
+        />
       )}
 
       {currentPage === "account-settings" && (
-        <div className='account-settings-page'>
-          {/* Header */}
-          <div className="header">
-            <h1>Account Settings</h1>
-          </div>
-
-          {/* Profile Icon and User Info */}
-          <div className="profile-section">
-            <div className="profile-pic-container">
-              <div className="profile-pic">
-                <img src={profilePic} alt="Profile" /> {/* Use profilePic state */}
-                <button className="camera-icon" onClick={() => document.getElementById('profile-upload').click()}>
-                  <span role="img" aria-label="camera">📷</span>
-                </button>
-                <input
-                  id="profile-upload"
-                  type="file"
-                  accept="image/*"
-                  style={{ display: 'none' }}
-                  onChange={handleProfilePicUpload}
-                />
-              </div>
-            </div>
-
-            {/* User Info */}
-            <div className="user-info">
-              <p><strong>{userDetails?.fullName || "Marry Doe"}</strong></p>
-              <p>{userDetails?.email || "Marry@Gmail.Com"}</p>
-            </div>
-          </div>
-
-          {/* Additional Details */}
-          <div className="description">
-            <p>Phone: {userDetails?.phoneNumber || "N/A"}</p>
-            <p>Company: {userDetails?.companyName || "N/A"}</p>
-            <p>Agency: {userDetails?.isAgency ? "Yes" : "No"}</p>
-          </div>
-
-          {/* Back Button */}
-          <button className="back-button" onClick={() => setCurrentPage("landing")}>Back</button>
-        </div>
+        <AccSettnPg
+          userDetails={userDetails}
+          profilePic={profilePic}
+          onBack={() => setCurrentPage("landing")}
+          onProfilePicChange={handleProfilePicUpload}
+        />
       )}
     </div>
-  );
+  )
 }
